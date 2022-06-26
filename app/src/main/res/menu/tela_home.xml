@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/perfil"
+            android:icon="@drawable/ic_perfil"
+            android:title="Perfil" />
+        <item
+            android:id="@+id/chatbot"
+            android:icon="@drawable/ic_chatbot"
+            android:title="Chatbot" />
+        <item
+            android:id="@+id/atualizar"
+            android:icon="@drawable/ic_atualizar"
+            android:title="Novo Documento" />
+    </group>
+
+    <item android:title="Sistema">
+        <menu>
+            <item
+                android:id="@+id/config"
+                android:icon="@drawable/ic_config"
+                android:title="Configurações" />
+            <item
+                android:id="@+id/ajuda"
+                android:icon="@drawable/ic_ajuda"
+                android:title="Ajuda" />
+        </menu>
+    </item>
+
+</menu>
