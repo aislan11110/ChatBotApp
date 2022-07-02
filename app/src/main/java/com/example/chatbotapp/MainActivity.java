@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tom_roush.pdfbox.android.PDFBoxResourceLoader;
@@ -44,6 +45,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        if(savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ChatBot()).commit();
+            navigationView.setCheckedItem(R.id.nav_chatbot);
+
+        }
+
     }
 
     @Override
@@ -58,19 +66,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.chatbot:
-                Toast.makeText(MainActivity.this, "Fazer tela do chat", Toast.LENGTH_SHORT).show();
+            case R.id.nav_chatbot:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ChatBot()).commit();
                 break;
 
-            case R.id.perfil:
+            case R.id.nav_perfil:
                 Toast.makeText(MainActivity.this, "Fazer tela do perfil", Toast.LENGTH_SHORT).show();
                 break;
 
-            case R.id.config:
+            case R.id.nav_config:
                 Toast.makeText(MainActivity.this, "Fazer tela da configuração", Toast.LENGTH_SHORT).show();
                 break;
 
-            case R.id.ajuda:
+            case R.id.nav_ajuda:
                 Toast.makeText(MainActivity.this, "Fazer tela da ajuda", Toast.LENGTH_SHORT).show();
                 break;
         }

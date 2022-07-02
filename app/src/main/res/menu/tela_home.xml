@@ -5,15 +5,15 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/perfil"
+            android:id="@+id/nav_perfil"
             android:icon="@drawable/ic_perfil"
             android:title="Perfil" />
         <item
-            android:id="@+id/chatbot"
+            android:id="@+id/nav_chatbot"
             android:icon="@drawable/ic_chatbot"
             android:title="Chatbot" />
         <item
-            android:id="@+id/atualizar"
+            android:id="@+id/nav_atualizar"
             android:icon="@drawable/ic_atualizar"
             android:title="Novo Documento" />
     </group>
@@ -21,11 +21,11 @@
     <item android:title="Sistema">
         <menu>
             <item
-                android:id="@+id/config"
+                android:id="@+id/nav_config"
                 android:icon="@drawable/ic_config"
                 android:title="Configurações" />
             <item
-                android:id="@+id/ajuda"
+                android:id="@+id/nav_ajuda"
                 android:icon="@drawable/ic_ajuda"
                 android:title="Ajuda" />
         </menu>
