@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E3E3E3">
@@ -19,7 +20,7 @@
         <EditText
             android:id="@+id/mensagem"
             android:layout_width="379dp"
-            android:layout_height="57dp"
+            android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
@@ -28,21 +29,20 @@
             android:layout_toLeftOf="@id/mensagem_enviar"
             android:background="@drawable/back_mensagem"
             android:hint="Mensagem"
-            android:paddingStart="25dp"
             android:inputType="textCapSentences"
-            android:paddingEnd="15dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:textColor="@color/white"
             android:textColorHint="#E3E3E3" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/mensagem_enviar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_send"
             android:layout_alignParentEnd="true"
             android:layout_margin="4dp"
-            android:backgroundTint="#017075"
-            android:src="@drawable/ic_send"
-            android:tint="@color/white" />
+            android:backgroundTint="#017075"/>
     </RelativeLayout>
 
 
