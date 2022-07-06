@@ -1,6 +1,5 @@
 package com.example.chatbotapp;
 
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 import com.tom_roush.pdfbox.android.PDFBoxResourceLoader;
@@ -27,15 +25,13 @@ import java.io.InputStream;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
 
-    AssetManager assetManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+      //  leitortxt();
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -88,25 +84,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void leitorarquivo(){
-         /*  try {
-            assetManager = getAssets();
-            PDFBoxResourceLoader.init(getApplicationContext());
-          InputStream stream =  assetManager.open("bula_ibuprofeno.pdf");
-            PDDocument document = PDDocument.load(stream);
-            PDFTextStripper stripper = new PDFTextStripper();
-            String text = stripper.getText(document);
-            document.close();
-            File path = getApplicationContext().getExternalFilesDir(null);
-            File file = new File(path,"teste");
-            FileWriter fw = new FileWriter(file);
-            fw.write(text);
-            fw.close();
-
-        } catch (IOException e) {
+    private void leitortxt(){
+        try {
+            ChatBotIA bot = new ChatBotIA(getExternalFilesDir(null),"teste");
+        } catch (Exception e) {
             e.printStackTrace();
         }
-       */
+    }
+
+    //Pergunta se o arquivo existe
+    boolean hasExternalStoragePrivateFile(String s) {
+        //pergunta existencia de arquivo com dado nome s
+        File file = new File(
+                getExternalFilesDir(null), s
+        );
+        return file.exists();
     }
 
 }
