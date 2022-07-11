@@ -43,13 +43,13 @@ public class TelaSplash extends AppCompatActivity {
         try {
             assetManager = getAssets();
             PDFBoxResourceLoader.init(getApplicationContext());
-            InputStream stream = assetManager.open("bula_ibuprofeno.pdf");
+            InputStream stream = assetManager.open("sol_de_glicose_5_e_10.pdf");
             PDDocument document = PDDocument.load(stream);
             PDFTextStripper stripper = new PDFTextStripper();
             String text = stripper.getText(document);
             document.close();
             File path = getApplicationContext().getExternalFilesDir(null);
-            File file = new File(path, "teste");
+            File file = new File(path, "teste.txt");
             FileWriter fw = new FileWriter(file);
             fw.write(text);
             fw.close();

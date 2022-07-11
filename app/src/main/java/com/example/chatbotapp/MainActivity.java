@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-      //  leitortxt();
+        leitortxt();
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void leitortxt(){
         try {
-            ChatBotIA bot = new ChatBotIA(getExternalFilesDir(null),"teste");
+            ChatBotIA bot = new ChatBotIA(getExternalFilesDir(null),"teste.txt");
         } catch (Exception e) {
             e.printStackTrace();
         }
