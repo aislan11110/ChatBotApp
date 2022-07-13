@@ -9,7 +9,7 @@
         android:id="@+id/RecV_ChatBot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/Relative_Mensagem"/>
+        android:layout_above="@id/Relative_Mensagem" />
 
     <RelativeLayout
         android:id="@+id/Relative_Mensagem"
