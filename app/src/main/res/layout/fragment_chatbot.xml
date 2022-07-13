@@ -9,7 +9,7 @@
         android:id="@+id/RecV_ChatBot"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/Relative_Mensagem" />
+        android:layout_above="@id/Relative_Mensagem"/>
 
     <RelativeLayout
         android:id="@+id/Relative_Mensagem"
@@ -39,10 +39,14 @@
             android:id="@+id/mensagem_enviar"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/ic_send"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="4dp"
-            android:backgroundTint="#017075"/>
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:backgroundTint="#017075"
+            android:src="@drawable/ic_send" />
     </RelativeLayout>
 
 

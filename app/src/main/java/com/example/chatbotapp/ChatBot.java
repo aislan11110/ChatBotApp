@@ -57,6 +57,8 @@ public class ChatBot extends Fragment {
     private void getResponse(String mensagem){
         chatModalArrayList.add(new ChatModal(mensagem, USER_KEY));
         chatModalArrayList.add(new ChatModal("Programar resposta do bot", BOT_KEY));
+        chat.scrollToPosition(chatModalArrayList.size()-1);
     }
 
 }
+
