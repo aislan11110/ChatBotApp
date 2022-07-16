@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Scanner;
 
 public class TelaSplash extends AppCompatActivity {
     AssetManager assetManager;
@@ -42,12 +43,19 @@ public class TelaSplash extends AppCompatActivity {
     private void leitorpdfparatxt() {
         try {
             assetManager = getAssets();
-            PDFBoxResourceLoader.init(getApplicationContext());
+        /*    PDFBoxResourceLoader.init(getApplicationContext());
             InputStream stream = assetManager.open("sol_de_glicose_5_e_10.pdf");
             PDDocument document = PDDocument.load(stream);
             PDFTextStripper stripper = new PDFTextStripper();
             String text = stripper.getText(document);
             document.close();
+         */
+            String text = "";
+            InputStream inputstream = getAssets().open("teste1.txt");
+            Scanner scanner = new Scanner(inputstream);
+            while(scanner.hasNextLine()){
+                text += scanner.nextLine()+"\n";
+            }
             File path = getApplicationContext().getExternalFilesDir(null);
             File file = new File(path, "teste.txt");
             FileWriter fw = new FileWriter(file);
