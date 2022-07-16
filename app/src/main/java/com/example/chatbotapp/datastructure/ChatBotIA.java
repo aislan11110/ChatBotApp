@@ -3,10 +3,11 @@ package com.example.chatbotapp.datastructure;
 import androidx.annotation.NonNull;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ChatBotIA {
+public class ChatBotIA implements Serializable {
 
     ArrayList<Mapa> mapa = new ArrayList<Mapa>();
     String pathfile;
@@ -90,4 +91,7 @@ public class ChatBotIA {
         }
     }
 
+    public ArrayList<Mapa> getMapa() {
+        return mapa;
+    }
 }

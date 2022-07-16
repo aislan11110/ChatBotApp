@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chatbotapp.datastructure.ChatBotIA;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -25,6 +26,11 @@ public class ChatBot extends Fragment {
     private final String BOT_KEY = "bot";
     private ArrayList<ChatModal>chatModalArrayList;
     private ChatRV chatRV;
+    private ChatBotIA bot;
+
+    public ChatBot(ChatBotIA bot) {
+        this.bot = bot;
+    }
 
     @Nullable
     @Override
@@ -39,7 +45,7 @@ public class ChatBot extends Fragment {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         chat.setLayoutManager(manager);
         chat.setAdapter(chatRV);
-
+        chatModalArrayList.add(new ChatModal("olá usuario\n\n"+mostrarOpções(),BOT_KEY));
         MensagemEnviar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -54,11 +60,20 @@ public class ChatBot extends Fragment {
         return view;
     }
 
-    private void getResponse(String mensagem){
+    private void getResponse(String mensagem) {
         chatModalArrayList.add(new ChatModal(mensagem, USER_KEY));
         chatModalArrayList.add(new ChatModal("Programar resposta do bot", BOT_KEY));
-        chat.scrollToPosition(chatModalArrayList.size()-1);
+        chat.scrollToPosition(chatModalArrayList.size() - 1);
     }
+
+    private String mostrarOpções(){
+        String concatenador="";
+        for(int x=0;x<bot.getMapa().size();x++){
+            concatenador+=bot.getMapa().get(x).getChave()+"\n";
+        }
+        return concatenador;
+    }
+
 
 }
 

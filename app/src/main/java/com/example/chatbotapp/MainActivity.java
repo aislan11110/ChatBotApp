@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.chatbotapp.datastructure.ChatBotIA;
 import com.google.android.material.navigation.NavigationView;
@@ -18,14 +20,14 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
-
+    private ChatBotIA bot;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        leitortxt();
+        bot = leitortxt();
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -36,8 +38,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         if(savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ChatBot()).commit();
+       /*     Fragment frag = new ChatBot();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("path",bot);
+            frag.setArguments(bundle);
+            FragmentManager fragManager = getSupportFragmentManager();
+            fragManager.beginTransaction().replace(R.id.fragment_container,
+                    frag).commit();
+
+        */
+          getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ChatBot(bot)).commit();
+
+
             navigationView.setCheckedItem(R.id.nav_chatbot);
 
         }
@@ -58,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()){
             case R.id.nav_chatbot:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ChatBot()).commit();
+                        new ChatBot(bot)).commit();
                 break;
 
             case R.id.nav_perfil:
@@ -78,12 +91,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private void leitortxt(){
+    private ChatBotIA leitortxt(){
         try {
             ChatBotIA bot = new ChatBotIA(getExternalFilesDir(null),"teste.txt");
+            return bot;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     //Pergunta se o arquivo existe
