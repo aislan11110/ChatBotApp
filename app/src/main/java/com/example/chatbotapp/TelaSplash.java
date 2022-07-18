@@ -51,6 +51,9 @@ public class TelaSplash extends AppCompatActivity {
             document.close();
          */
             String text = "";
+
+            // transformador_a_oleo
+            // teste1
             InputStream inputstream = getAssets().open("teste1.txt");
             Scanner scanner = new Scanner(inputstream);
             while(scanner.hasNextLine()){

@@ -45,7 +45,7 @@ public class ChatBot extends Fragment {
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         chat.setLayoutManager(manager);
         chat.setAdapter(chatRV);
-        chatModalArrayList.add(new ChatModal("olá usuario\n\n"+mostrarOpções(),BOT_KEY));
+        startbot();
         MensagemEnviar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -62,7 +62,10 @@ public class ChatBot extends Fragment {
 
     private void getResponse(String mensagem) {
         chatModalArrayList.add(new ChatModal(mensagem, USER_KEY));
-        chatModalArrayList.add(new ChatModal("Programar resposta do bot", BOT_KEY));
+        chatModalArrayList.add(new ChatModal(bot.resposta(mensagem), BOT_KEY));
+        if(mensagem.equals("-1")){
+           startbot();
+        }
         chat.scrollToPosition(chatModalArrayList.size() - 1);
     }
 
@@ -72,6 +75,10 @@ public class ChatBot extends Fragment {
             concatenador+=bot.getMapa().get(x).getChave()+"\n";
         }
         return concatenador;
+    }
+
+    private void startbot (){
+        chatModalArrayList.add(new ChatModal("olá usuario\n\n"+mostrarOpções(),BOT_KEY));
     }
 
 

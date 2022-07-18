@@ -11,6 +11,7 @@ public class ChatBotIA implements Serializable {
 
     ArrayList<Mapa> mapa = new ArrayList<Mapa>();
     String pathfile;
+    private String opçãouser = "";
 
     public ChatBotIA(File bula, String s) throws Exception {
         pathfile = bula.getPath()+"/"+s;
@@ -65,10 +66,45 @@ public class ChatBotIA implements Serializable {
         }
 
     public String resposta(@NonNull String user){
-
-
-
-        return "";
+        Integer opção = Integer.parseInt(user);
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        if(opção==-1){
+            opçãouser="";
+            return "resetado";
+        } else {
+            if (opçãouser == "") {
+                opçãouser = opção.toString() + "-";
+            } else {
+                opçãouser += opção.toString() + "-";
+            }
+        }
+        String concatenador="";
+        for(int x=0;x<opçãouser.length();x++){
+            if(Character.isDigit(opçãouser.charAt(x))){
+                concatenador+=Character.toString(opçãouser.charAt(x));
+            } else if(opçãouser.charAt(x)=='-'){
+                list.add(Integer.parseInt(concatenador)-1);
+                concatenador="";
+            }
+        }
+        Mapa ponteiro = null;
+        for(int x=0;x<list.size();x++){
+            if(x==0) {
+                ponteiro = mapa.get(list.get(x));
+            } else {
+                ponteiro = ponteiro.getSubseções().get(list.get(x));
+            }
+        }
+        String last ="";
+        if(ponteiro!=null) {
+             last = ponteiro.getInfo() + "\n\n";
+             if(ponteiro.getSubseções().size()>0){
+                 for(int x=0;x<ponteiro.getSubseções().size();x++){
+                     last+=ponteiro.getSubseções().get(x).getChave()+"\n";
+                 }
+             }
+        }
+        return last;
     }
 
     private Boolean isCase(String s){
