@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -62,23 +61,26 @@ public class ChatBot extends Fragment {
 
     private void getResponse(String mensagem) {
         chatModalArrayList.add(new ChatModal(mensagem, USER_KEY));
-        chatModalArrayList.add(new ChatModal(bot.resposta(mensagem), BOT_KEY));
-        if(mensagem.equals("-1")){
-           startbot();
-        }
+        respostadobot(mensagem);
         chat.scrollToPosition(chatModalArrayList.size() - 1);
     }
 
-    private String mostrarOpções(){
-        String concatenador="";
-        for(int x=0;x<bot.getMapa().size();x++){
-            concatenador+=bot.getMapa().get(x).getChave()+"\n";
+    private void respostadobot(String mensagem){
+        if(mensagem.length()>0) {
+            chatModalArrayList.add(new ChatModal(bot.resposta(mensagem), BOT_KEY));
+            if (mensagem.equals("-1")) {
+                restartbot();
+            }
+        } else {
+            chatModalArrayList.add(new ChatModal("mensagem invalida", BOT_KEY));
         }
-        return concatenador;
     }
 
     private void startbot (){
-        chatModalArrayList.add(new ChatModal("olá usuario\n\n"+mostrarOpções(),BOT_KEY));
+        chatModalArrayList.add(new ChatModal("olá usuario\n\n"+bot.resposta(""),BOT_KEY));
+    }
+    private void restartbot(){
+        chatModalArrayList.add(new ChatModal(bot.resposta(""),BOT_KEY));
     }
 
 

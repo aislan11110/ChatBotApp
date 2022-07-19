@@ -66,47 +66,94 @@ public class ChatBotIA implements Serializable {
         }
 
     public String resposta(@NonNull String user){
-        Integer opção = Integer.parseInt(user);
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        if(opção==-1){
-            opçãouser="";
-            return "resetado";
+        if(user.length()==0){
+            return mostrarOpções();
+        }
+        else if(isValidMessage(user)) {
+            if(user.equals("0") && opçãouser.equals("")){
+                return mostrarOpções();
+            }
+            Integer opção = Integer.parseInt(user);
+            String opçãouser2 = opçãouser;
+            if (opção == -1) {
+                opçãouser = "";
+                return "resetado";
+            } else if(opção == 0 && opçãouser2.length()>0){
+                String concatenador ="";
+                String [] op = opçãouser2.split("-");
+                for(int x=0;x<op.length-1;x++){
+                    concatenador+=op[x]+"-";
+                }
+                opçãouser2=concatenador;
+            } else {
+                if (opçãouser2 == "") {
+                    opçãouser2 = opção.toString() + "-";
+                } else {
+                    opçãouser2 += opção.toString() + "-";
+                }
+            }
+            if(opçãouser2==""){
+                opçãouser=opçãouser2;
+               return mostrarOpções();
+            }
+            ArrayList<Integer> list = userOptionstr(opçãouser2);
+            Mapa ponteiro = null;
+            for (int x = 0; x < list.size(); x++) {
+                if (x == 0 && list.get(x)<=mapa.size()) {
+                        ponteiro = mapa.get(list.get(x));
+
+                } else if(list.get(x)<=ponteiro.getSubseções().size()){
+                    ponteiro = ponteiro.getSubseções().get(list.get(x));
+                } else {
+                    return isInvalido();
+                }
+            }
+            String last = "";
+            if (ponteiro != null) {
+                last = ponteiro.getInfo() + "\n\n";
+                if (ponteiro.getSubseções().size() > 0) {
+                    for (int x = 0; x < ponteiro.getSubseções().size(); x++) {
+                        last += ponteiro.getSubseções().get(x).getChave() + "\n";
+                    }
+                }
+            }
+            opçãouser=opçãouser2;
+            return last;
         } else {
-            if (opçãouser == "") {
-                opçãouser = opção.toString() + "-";
-            } else {
-                opçãouser += opção.toString() + "-";
-            }
+            return isInvalido();
         }
-        String concatenador="";
-        for(int x=0;x<opçãouser.length();x++){
-            if(Character.isDigit(opçãouser.charAt(x))){
-                concatenador+=Character.toString(opçãouser.charAt(x));
-            } else if(opçãouser.charAt(x)=='-'){
-                list.add(Integer.parseInt(concatenador)-1);
-                concatenador="";
-            }
-        }
-        Mapa ponteiro = null;
-        for(int x=0;x<list.size();x++){
-            if(x==0) {
-                ponteiro = mapa.get(list.get(x));
-            } else {
-                ponteiro = ponteiro.getSubseções().get(list.get(x));
-            }
-        }
-        String last ="";
-        if(ponteiro!=null) {
-             last = ponteiro.getInfo() + "\n\n";
-             if(ponteiro.getSubseções().size()>0){
-                 for(int x=0;x<ponteiro.getSubseções().size();x++){
-                     last+=ponteiro.getSubseções().get(x).getChave()+"\n";
-                 }
-             }
-        }
-        return last;
     }
 
+    private ArrayList<Integer> userOptionstr(String opçãouser2){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        String concatenador = "";
+        for (int x = 0; x < opçãouser2.length(); x++) {
+            if (Character.isDigit(opçãouser2.charAt(x))) {
+                concatenador += Character.toString(opçãouser2.charAt(x));
+            } else if (opçãouser2.charAt(x) == '-') {
+                list.add(Integer.parseInt(concatenador) - 1);
+                concatenador = "";
+            }
+        }
+        return list;
+    }
+
+    private boolean isValidMessage(String user){
+        for(int x=0;x<user.length();x++){
+            if(user.charAt(x)=='-' && x==0) {
+                continue;
+            } else if(Character.isDigit(user.charAt(x))){
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private String isInvalido(){
+        return "Invalido";
+    }
     private Boolean isCase(String s){
         int tamanho = s.length();
         if(s.length()<2){
@@ -125,6 +172,14 @@ public class ChatBotIA implements Serializable {
         } else {
             return false;
         }
+    }
+    private String mostrarOpções(){
+        String concatenador="-1 reseta\n\n" +
+                "0 volta\n\n";
+        for(int x=0;x<mapa.size();x++){
+            concatenador+=mapa.get(x).getChave()+"\n";
+        }
+        return concatenador;
     }
 
     public ArrayList<Mapa> getMapa() {
