@@ -28,41 +28,20 @@ public class ChatBotIA implements Serializable {
             line = scanner.nextLine();
             if(line.length()>1) {
                 if(isCase(line)){
-                    if(chave!="" && concatenador!=""){
-                        if(isSubcase(chave)){
-                            int tamanho = mapa.size()-1;
-                            mapa.get(tamanho).getSubseções().add(new Mapa (chave));
-                            int tamanho2 = mapa.get(tamanho).getSubseções().size()-1;
-                            mapa.get(tamanho).getSubseções().get(tamanho2).setInfo(concatenador);
-                        } else {
-                            mapa.add(new Mapa(chave));
-                            int tamanho =mapa.size()-1;
-                            mapa.get(tamanho).setInfo(concatenador);
-                        }
-                    } else if (chave!="" && isCase(chave) && concatenador==""){
-                        mapa.add(new Mapa(chave));
-                        int tamanho =mapa.size()-1;
-                        mapa.get(tamanho).setInfo(concatenador);
+                    if(chave!=""){
+                        treeFunction(chave,concatenador);
                     }
-                    chave = line;
+                    chave= line;
                     concatenador="";
-                } else if(chave!=""){
+                } else if (chave!=""){
                     concatenador+=line+"\n";
                 }
             }
         }
         if(chave!="" && concatenador!=""){
-            if(isSubcase(chave)){
-                int tamanho = mapa.size()-1;
-                mapa.get(tamanho).getSubseções().add(new Mapa (chave));
-                int tamanho2 = mapa.get(tamanho).getSubseções().size()-1;
-                mapa.get(tamanho).getSubseções().get(tamanho2).setInfo(concatenador);
-            } else {
-                mapa.add(new Mapa(chave));
-                int tamanho =mapa.size()-1;
-                mapa.get(tamanho).setInfo(concatenador);
-            }
+            treeFunction(chave,concatenador);
         }
+
         }
 
     public String resposta(@NonNull String user){
@@ -80,16 +59,16 @@ public class ChatBotIA implements Serializable {
                 return "resetado";
             } else if(opção == 0 && opçãouser2.length()>0){
                 String concatenador ="";
-                String [] op = opçãouser2.split("-");
+                String [] op = opçãouser2.split("\\.");
                 for(int x=0;x<op.length-1;x++){
-                    concatenador+=op[x]+"-";
+                    concatenador+=op[x]+".";
                 }
                 opçãouser2=concatenador;
             } else {
                 if (opçãouser2 == "") {
-                    opçãouser2 = opção.toString() + "-";
+                    opçãouser2 = opção.toString() + ".";
                 } else {
-                    opçãouser2 += opção.toString() + "-";
+                    opçãouser2 += opção.toString() + ".";
                 }
             }
             if(opçãouser2==""){
@@ -130,7 +109,7 @@ public class ChatBotIA implements Serializable {
         for (int x = 0; x < opçãouser2.length(); x++) {
             if (Character.isDigit(opçãouser2.charAt(x))) {
                 concatenador += Character.toString(opçãouser2.charAt(x));
-            } else if (opçãouser2.charAt(x) == '-') {
+            } else if (opçãouser2.charAt(x) == '.') {
                 list.add(Integer.parseInt(concatenador) - 1);
                 concatenador = "";
             }
@@ -140,7 +119,7 @@ public class ChatBotIA implements Serializable {
 
     private boolean isValidMessage(String user){
         for(int x=0;x<user.length();x++){
-            if(user.charAt(x)=='-' && x==0) {
+            if(user.charAt(x)=='.' && x==0) {
                 continue;
             } else if(Character.isDigit(user.charAt(x))){
                 continue;
@@ -164,15 +143,27 @@ public class ChatBotIA implements Serializable {
             return false;
         }
     }
-    private Boolean isSubcase(String s){
-        if(s.length()<4){
-            return false;
-        } else if(Character.isDigit(s.charAt(2)) && s.charAt(3)=='.'){
-            return true;
-        } else {
-            return false;
+    private String onlyCase(String s){
+        String concatenador="";
+        for(int x=0;x<s.length();x++){
+            if(Character.isDigit(s.charAt(x)) || s.charAt(x)=='.'){
+                concatenador+=Character.toString(s.charAt(x));
+            } else {
+                break;
+            }
         }
+        return concatenador;
     }
+    private int howCase(String s){
+        int caso = 0;
+        for(int x=0;x<s.length();x++){
+            if(s.charAt(x)=='.'){
+                caso++;
+            }
+        }
+        return caso-1;
+    }
+
     private String mostrarOpções(){
         String concatenador="-1 reseta\n\n" +
                 "0 volta\n\n";
@@ -182,7 +173,25 @@ public class ChatBotIA implements Serializable {
         return concatenador;
     }
 
-    public ArrayList<Mapa> getMapa() {
-        return mapa;
+    //TODO
+    private void treeFunction(String chave, String concatenador){
+        int profundidade = howCase(onlyCase(chave));
+        if(profundidade==0){
+            ArrayList<Mapa> ponteiro = mapa;
+            ponteiro.add(new Mapa(chave));
+            int tamanho =ponteiro.size()-1;
+            ponteiro.get(tamanho).setInfo(concatenador);
+
+        } else {
+            Mapa ponteiro = mapa.get(mapa.size()-1);
+            for(int x=1;x<profundidade;x++){
+                ponteiro = ponteiro.getSubseções().get(ponteiro.getSubseções().size()-1);
+            }
+            ponteiro.getSubseções().add(new Mapa(chave));
+            int tamanho2 = ponteiro.getSubseções().size()-1;
+            ponteiro.getSubseções().get(tamanho2).setInfo(concatenador);
+        }
+
     }
+
 }

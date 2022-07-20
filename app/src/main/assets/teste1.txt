@@ -14,7 +14,7 @@ USO INTRAVENOSO E INDIVIDUALIZADO
 USO ADULTO E PEDIÁTRICO 
  
 3.COMPOSIÇÃO: 
- 
+
 3.1. Glicose 5%
  
 Cada mL da solução contém: 
@@ -83,19 +83,19 @@ As soluções de glicose não devem ser administradas em pacientes com insufici�
 ESTE MEDICAMENTO NÃO DEVE SER UTILIZADO POR MULHERES GRÁVIDAS SEM 
 ORIENTAÇÃO MÉDICA OU DO CIRURGIÃO DENTISTA. 
  
-Uso em crianças, idosos e em outros grupos de risco 
+4.4.1. Uso em crianças, idosos e em outros grupos de risco
  
-Uso em crianças 
+4.4.1.1. Uso em crianças
  
 Um estudo realizado em mulheres saudáveis, que se encontravam em estágio final de gestação, verificou que a administração de 100 g de glicose uma hora antes do fim da gestação, não provocou nenhum efeito adverso nos níveis ácido-base do feto. Os fetos com malformação foram excluídos. Entretanto, os autores advertiram que, em concentrações de glicose mais elevadas na mãe (como pode ser encontrado em grávidas diabéticas), mudanças consistentes na acidose metabólica fetal, podem ocorrer, e que o teste da tolerância da glicose pode também ser perigoso aos fetos com retardo do crescimento. 
  
 O cuidado deve ser exercitado no tratamento dos recém-nascidos, especialmente os prematuros, nos quais a função renal pode estar imatura e a habilidade de eliminas cargas do líquido e do soluto pode estar limitada.  
  
-Uso em idosos
+4.4.1.2. Uso em idosos
  
 No geral, a seleção da dose para um paciente idoso deverá ser mais criteriosa. Sabe-se que a glicose é eliminada substancialmente pelos rins, e o risco de reações tóxicas das soluções de glicose pode ser maior nos pacientes com função renal comprometida. Os pacientes idosos são mais prováveis de ter a função renal diminuída, por isso, cuidado deve ser tomado na seleção da dose, e pode ser útil monitorar a função renal. 
  
-Interações medicamentosas
+4.4.2. Interações medicamentosas
  
 Não são conhecidas interações medicamentosas até o momento. Para minimizar o risco de possíveis incompatibilidades da mistura das soluções de glicose com outras medicações que possam ser prescritas, deve ser verificada a presença de turbidez ou precipitação imediatamente após a mistura, antes e durante a administração. Em caso de dúvida, consulte um farmacêutico.
  
@@ -138,7 +138,7 @@ Atenção: não usar embalagens primárias em conexões em série. Tal procedime
 NÃO PERFURAR A EMBALAGEM, POIS HÁ COMPROMETIMENTO DA ESTERILIDADE DO 
 PRODUTO E RISCO DE CONTAMINAÇÃO. 
  
- Para abrir:
+4.6.1. Para abrir:
  
 No caso das embalagens que possuem invólucro protetor: As empresas deverão descrever as informações necessárias para a correta abertura ou retirada do invólucro protetor sem risco de contaminação do produto. 
  
@@ -156,20 +156,20 @@ No preparo e administração das Soluções Parenterais (SP), devem ser seguidas
 4- Conectar o equipo de infusão da solução. Consultar as instruções de uso do equipo; 
 5- Administrar a solução, por gotejamento contínuo, conforme prescrição médica. 
  
- Para adição de medicamentos:
+4.6.2. Para adição de medicamentos:
  
 Atenção: verificar se há incompatibilidade entre o medicamento e a solução e, quando for o caso, se há incompatibilidade entre os medicamentos. 
  
 Apenas as embalagens que possuem dois sítios, um para o equipo e outro para a administração de medicamentos, poderão permitir a adição de medicamentos nas soluções parenterais. 
  
-Para administração de medicamentos antes da administração da solução parenteral: 
+4.6.3. Para administração de medicamentos antes da administração da solução parenteral:
  
 1- Preparar o sítio de injeção fazendo sua assepsia; 
 2- Utilizar uma seringa com agulha estéril para perfurar o sítio próprio para administração de medicamentos e injetar o medicamento na solução parenteral. 
 3- Misturar o medicamento completamente na solução parenteral. 
 4- Pós liofilizados devem ser reconstituídos/suspendidos no diluente estéril e apirogênico adequado antes de ser adicionados à solução parenteral. 
  
- Para administração de medicamentos durante a administração da solução parenteral:
+4.6.4. Para administração de medicamentos durante a administração da solução parenteral:
  
 1- Fechar a pinça do equipo de infusão; 
 2- Preparar o sítio próprio para administração de medicamentos, fazendo sua assepsia; 
@@ -181,7 +181,7 @@ FAZ-SE NECESSÁRIA A ILUSTRAÇÃO, ATRAVÉS DE FIGURAS, DO MÉTODO DE
 PREPARO E ADMINISTRAÇÃO DA SOLUÇÃO DE ÁGUA PARA INJEÇÃO COM 
 MEDICAMENTOS. 
  
- Posologia
+4.7. Posologia
  
 O preparo e administração da Solução Parenteral devem obedecer à prescrição, precedida de criteriosa avaliação, pelo farmacêutico, da compatibilidade físico-química e da interação medicamentosa que possam ocorrer entre os seus componentes. 
  
@@ -198,21 +198,20 @@ A avaliação clínica e as determinações laboratoriais periódicas são neces
  
 Siga a orientação de seu médico, respeitando sempre os horários, as doses e a duração do tratamento. Não interrompa o tratamento sem o conhecimento do seu médico. 
  
-4.7. O QUE DEVO FAZER QUANDO ME ESQUECER DE USAR ESTE MEDICAMENTO?
+4.8. O QUE DEVO FAZER QUANDO ME ESQUECER DE USAR ESTE MEDICAMENTO?
  
 A utilização deste medicamento ocorrerá em ambiente hospitalar, orientado e executado por profissionais especializados e não dependerá da conduta do paciente.  
  
 Em caso de dúvidas, procure orientação do farmacêutico ou de seu médico ou cirurgião-dentista. 
  
-4.8. QUAIS OS MALES QUE ESTE MEDICAMENTO PODE ME CAUSAR?
+4.9. QUAIS OS MALES QUE ESTE MEDICAMENTO PODE ME CAUSAR?
  
 As reações adversas podem ocorrer devido à solução ou à técnica de administração e incluem febre, infecção no ponto de injeção, trombose venosa ou flebite (inflamação) irradiando-se a partir do ponto de injeção, extravasamento e hipervolemia (redução do volume de sangue). Se ocorrer reação adversa, suspender a infusão, avaliar o paciente, aplicar terapêutica corretiva apropriada e guardar o restante da solução para posterior investigação, se necessário. 
 Algumas destas reações podem ser devido aos produtos de degradação presentes após autoclavação. A infusão intravenosa pode conduzir ao desenvolvimento de distúrbios líquidos e eletrólitos incluindo a hipocalemia (redução de potássio no sangue), a hipomagnesemia (redução de magnésio no sangue), e a hipofosfatemia (redução de fósforo no sangue). 
  
 Informe ao seu médico, cirurgião-dentista ou farmacêutico o aparecimento de reações indesejáveis pelo uso do medicamento. Informe também à empresa através de seu serviço de atendimento. 
  
-4.9. O QUE FAZER SE ALGUÉM USAR UMA QUANTIDADE MAIOR QUE A INDICADA
-DESTE MEDICAMENTO? 
+4.10. O QUE FAZER SE ALGUÉM USAR UMA QUANTIDADE MAIOR QUE A INDICADA DESTE MEDICAMENTO?
  
 A infusão de grandes volumes da solução de glicose 5% e 10% pode causar 
 hipervolemia(redução do volume de sangue), resultando em diluições eletrolíticas do soro, estados congestivos e edemas pulmonares. A infusão muito rápida de glicose pode ocasionar distúrbios neurológicos como depressão e coma, devidos aos fenômenos de hiperosmolaridade, principalmente em portadores de nefropatias (insuficiência renal) crônicas. Nestes casos, a infusão deve ser interrompida e a terapia de apoio deve ser instalada. 
@@ -274,15 +273,15 @@ Estudos verificaram que quando administrada durante o trabalho de parto, a carga
 ESTE MEDICAMENTO NÃO DEVE SER UTILIZADO POR MULHERES GRÁVIDAS SEM 
 ORIENTAÇÃO MÉDICA OU DO CIRURGIÃO DENTISTA. 
  
-Uso pediátrico, geriátrico e em outros grupos de risco 
+5.4.1. Uso pediátrico, geriátrico e em outros grupos de risco
  
-Uso pediátrico 
+5.4.1.1. Uso pediátrico
  
 Em estudo placebo-controlado realizado em mulheres saudáveis, que se encontravam em estágio final de gestação, verificou-se que a administração de 100 g de glicose uma hora antes do fim da gestação, não provocou nenhum efeito adverso nos níveis ácido-base do feto. Os fetos com malformação foram excluídos. Entretanto, os autores advertiram que, em concentrações de glicose mais elevadas na mãe (como pode ser encontrado em grávidas diabéticas), mudanças consistentes na acidose metabólica fetal, podem ocorrer, e que o teste da tolerância da glicose pode também ser perigoso aos fetos com retardo do crescimento. 
  
 O cuidado deve ser exercitado no tratamento dos neonatos, especialmente os neonatos precoces, cuja função renal pode estar imatura e cuja habilidade de excretar cargas do líquido e do soluto pode estar limitada.  
  
-Uso geriátrico 
+5.4.1.2. Uso geriátrico
  
 No geral, a seleção da dose para um paciente idoso deverá ser mais criteriosa. Sabe-se que estas drogas são excretadas substancialmente pelos rins, e o risco de reações tóxicas das soluções de glicose pode ser maior nos pacientes com função renal comprometida. Os pacientes idosos são mais prováveis de ter a função renal diminuída, por isso, cuidado deve ser tomado na seleção da dose, e pode ser útil monitorar a função renal. 
  
@@ -329,7 +328,7 @@ Atenção: não usar embalagens primárias em conexões em série. Tal procedime
 NÃO PERFURAR A EMBALAGEM, POIS HÁ COMPROMETIMENTO DA ESTERILIDADE DO 
 PRODUTO E RISCO DE CONTAMINAÇÃO. 
  
-Para abrir: 
+5.7.1. Para abrir:
  
 No caso das embalagens que possuem invólucro protetor: As empresas deverão descrever as informações necessárias para a correta abertura ou retirada do invólucro protetor sem risco de contaminação do produto. 
  
@@ -347,20 +346,20 @@ No preparo e administração das Soluções Parenterais (SP), devem ser seguidas
 4- Conectar o equipo de infusão da solução. Consultar as instruções de uso do equipo; 
 5- Administrar a solução, por gotejamento contínuo, conforme prescrição médica. 
  
-Para adição de medicamentos: 
+5.7.2. Para adição de medicamentos:
  
 Atenção: verificar se há incompatibilidade entre o medicamento e a solução e, quando for o caso, se há incompatibilidade entre os medicamentos. 
  
 Apenas as embalagens que possuem dois sítios, um para o equipo e outro para a administração de medicamentos, poderão permitir a adição de medicamentos nas soluções parenterais. 
  
-Para administração de medicamentos antes da administração da solução parenteral: 
+5.7.3. Para administração de medicamentos antes da administração da solução parenteral:
  
 1- Preparar o sítio de injeção fazendo sua assepsia; 
 2- Utilizar uma seringa com agulha estéril para perfurar o sítio próprio para administração de medicamentos e injetar o medicamento na solução parenteral. 
 3- Misturar o medicamento completamente na solução parenteral. 
 4- Pós liofilizados devem ser reconstituídos/suspendidos no diluente estéril e apirogênico adequado antes de ser adicionados à solução parenteral. 
  
-Para administração de medicamentos durante a administração da solução parenteral: 
+5.7.4. Para administração de medicamentos durante a administração da solução parenteral:
  
 1- Fechar a pinça do equipo de infusão; 
 2- Preparar o sítio próprio para administração de medicamentos, fazendo sua assepsia; 
@@ -372,7 +371,7 @@ FAZ-SE NECESSÁRIA A ILUSTRAÇÃO, ATRAVÉS DE FIGURAS, DO MÉTODO DE
 PREPARO E ADMINISTRAÇÃO DA SOLUÇÃO DE ÁGUA PARA INJEÇÃO COM 
 MEDICAMENTOS. 
  
-Posologia 
+5.7.5. Posologia
  
 O preparo e administração da Solução Parenteral devem obedecer à prescrição, precedida de criteriosa avaliação, pelo farmacêutico, da compatibilidade físico-química e da interação medicamentosa que possam ocorrer entre os seus componentes. 
  
