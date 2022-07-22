@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ChatBotIA bot;
     private AlertDialog.Builder PopUpAjuda;
     private AlertDialog dialog;
+    private ImageButton PopUpClose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +110,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         PopUpAjuda.setView(PopUpView);
         dialog = PopUpAjuda.create();
         dialog.show();
+
+        PopUpClose = (ImageButton) PopUpView.findViewById(R.id.botao_fechar);
+        PopUpClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
     private ChatBotIA leitortxt(){
