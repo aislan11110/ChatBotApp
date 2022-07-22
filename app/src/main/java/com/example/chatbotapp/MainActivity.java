@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.chatbotapp.datastructure.ChatBotIA;
+import com.example.chatbotapp.datastructure.Perfil;
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 , R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        createNewPopUpAjuda();
 
         if(savedInstanceState == null) {
        /*     Fragment frag = new ChatBot();
@@ -79,11 +81,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_chatbot:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ChatBot(bot)).commit();
-                createNewPopUpAjuda();
                 break;
 
             case R.id.nav_perfil:
-                Toast.makeText(MainActivity.this, "Fazer tela do perfil", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Perfil()).commit();
                 break;
 
             case R.id.nav_config:
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav_ajuda:
-                Toast.makeText(MainActivity.this, "Fazer tela da ajuda", Toast.LENGTH_SHORT).show();
+                createNewPopUpAjuda();
                 break;
         }
 
@@ -107,9 +109,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dialog = PopUpAjuda.create();
         dialog.show();
     }
-
-
-
 
     private ChatBotIA leitortxt(){
         try {
