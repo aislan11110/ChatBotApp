@@ -2,10 +2,14 @@ package com.example.chatbotapp;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -21,6 +25,9 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private DrawerLayout drawer;
     private ChatBotIA bot;
+    private AlertDialog.Builder PopUpAjuda;
+    private AlertDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_chatbot:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ChatBot(bot)).commit();
+                createNewPopUpAjuda();
                 break;
 
             case R.id.nav_perfil:
@@ -90,6 +98,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public void createNewPopUpAjuda(){
+        PopUpAjuda = new AlertDialog.Builder(this);
+        final View PopUpView = getLayoutInflater().inflate(R.layout.popup, null);
+
+        PopUpAjuda.setView(PopUpView);
+        dialog = PopUpAjuda.create();
+        dialog.show();
+    }
+
+
+
 
     private ChatBotIA leitortxt(){
         try {
