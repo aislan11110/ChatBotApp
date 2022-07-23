@@ -18,20 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="200dp"
-                android:layout_height="199dp"
-                android:layout_marginTop="64dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/ic_user" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
-                android:layout_width="251dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="44dp"
+                android:id="@+id/Perfil_Name"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
                 android:ems="10"
                 android:hint="Name"
                 android:inputType="textPersonName"
@@ -39,40 +39,64 @@
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
-                android:layout_width="251dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="16dp"
+                android:id="@+id/Perfil_Email"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:ems="10"
                 android:hint="Email"
-                android:inputType="textPersonName"
+                android:inputType="textEmailAddress"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName4"
-                android:layout_width="251dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="16dp"
+                android:id="@+id/Perfil_Cargo"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
                 android:ems="10"
                 android:hint="Cargo"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF" />
 
+            <EditText
+                android:id="@+id/Perfil_Senha"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:ems="10"
+                android:hint="Senha"
+                android:inputType="textPassword"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#FFFFFF" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:text="Mostrar Senha"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
             <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
+                android:id="@+id/Perfil_Cadastrar"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:background="#FFFFFF"
                 android:text="Cadastrar" />
 
             <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
+                android:id="@+id/Perfil_Login"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Login" />
+                android:layout_marginTop="24dp"
+                android:background="#40FFFFFF"
+                android:text="Login"
+                android:layout_marginBottom="35dp"
+                />
+
         </LinearLayout>
     </ScrollView>
 
