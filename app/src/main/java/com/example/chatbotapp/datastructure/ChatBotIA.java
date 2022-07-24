@@ -45,8 +45,18 @@ public class ChatBotIA implements Serializable {
         }
 
     public String resposta(@NonNull String user){
-        if(user.length()==0){
+        if(user.length()==0 && opçãouser==""){
             return mostrarOpções();
+        } else if(isSearch(user)){
+           ArrayList<String> lista = deepSearch(user.substring(7));
+           String concatenador ="\n";
+           if(lista.size()==0){
+               return "nada encontrado com a palavra:\n"+user.substring(7);
+           }
+           for(int x=0;x<lista.size();x++){
+               concatenador+=lista.get(x)+"\n\n";
+           }
+            return concatenador;
         }
         else if(isValidMessage(user)) {
             if(user.equals("0") && opçãouser.equals("")){
@@ -118,21 +128,28 @@ public class ChatBotIA implements Serializable {
     }
 
     private boolean isValidMessage(String user){
-        for(int x=0;x<user.length();x++){
-            if(user.charAt(x)=='.' && x==0) {
-                continue;
-            } else if(Character.isDigit(user.charAt(x))){
-                continue;
-            } else {
-                return false;
-            }
+        if(user.equals("-1")) {
+            return true;
         }
+            for (int x = 0; x < user.length(); x++) {
+                if (x == 0 && user.charAt(x) == '-') {
+                    continue;
+                } else if (user.charAt(x) == '.' && x == 0) {
+                    continue;
+                } else if (Character.isDigit(user.charAt(x))) {
+                    continue;
+                } else {
+                    return false;
+                }
+            }
         return true;
     }
 
     private String isInvalido(){
         return "Invalido";
     }
+
+
     private Boolean isCase(String s){
         int tamanho = s.length();
         if(s.length()<2){
@@ -173,7 +190,7 @@ public class ChatBotIA implements Serializable {
         return concatenador;
     }
 
-    //TODO
+
     private void treeFunction(String chave, String concatenador){
         int profundidade = howCase(onlyCase(chave));
         if(profundidade==0){
@@ -192,6 +209,51 @@ public class ChatBotIA implements Serializable {
             ponteiro.getSubseções().get(tamanho2).setInfo(concatenador);
         }
 
+    }
+
+    private boolean isSearch(String s){
+        String search = "search:";
+        String tipo = s.toLowerCase();
+        for (int x=0;x<tipo.length();x++){
+            if(x>=search.length()){
+                return true;
+            } else if(search.charAt(x)==tipo.charAt(x)){
+                continue;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    private ArrayList<String> deepSearch(String s){
+        ArrayList<Mapa> ponteiro1 = mapa;
+        ArrayList<String> resultado = new ArrayList<String>();
+            for (int x = 0; x < ponteiro1.size(); x++) {
+                if(ponteiro1.get(x).getInfo()!="" && ponteiro1.get(x).getInfo().contains(s)){
+                    resultado.add(ponteiro1.get(x).getChave());
+                }
+                ArrayList<String> vindo = searchAux(s,ponteiro1.get(x));
+                if (vindo.size()!=0){
+                    resultado.addAll(vindo);
+                }
+            }
+            return resultado;
+    }
+
+    private ArrayList<String> searchAux(String s,Mapa pontaux){
+        ArrayList<Mapa> ponteiroaux = pontaux.getSubseções();
+        ArrayList<String> resultado = new ArrayList<String>();
+        for( int x=0;x< ponteiroaux.size();x++){
+            if(ponteiroaux.get(x).getInfo()!="" && ponteiroaux.get(x).getInfo().contains(s)){
+                resultado.add(ponteiroaux.get(x).getChave());
+            }
+            ArrayList<String> vindo = searchAux(s,ponteiroaux.get(x));
+            if (vindo.size()!=0){
+                resultado.addAll(vindo);
+            }
+        }
+        return resultado;
     }
 
 }
