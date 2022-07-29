@@ -48,13 +48,16 @@ public class ChatBotIA implements Serializable {
         if(user.length()==0 && opçãouser==""){
             return mostrarOpções();
         } else if(isSearch(user)){
-           ArrayList<String> lista = deepSearch(user.substring(7));
+           ArrayList<Ocorrencia> lista = deepSearch(user.substring(7));
            String concatenador ="\n";
            if(lista.size()==0){
                return "nada encontrado com a palavra:\n"+user.substring(7);
            }
            for(int x=0;x<lista.size();x++){
-               concatenador+=lista.get(x)+"\n\n";
+               concatenador+=lista.get(x).getChave()+"\n\n";
+               for(int y=0;y<lista.get(x).getOcorrencias().size();y++){
+                   concatenador+=lista.get(x).getOcorrencias().get(y)+"\n\n";
+               }
            }
             return concatenador;
         }
@@ -226,14 +229,17 @@ public class ChatBotIA implements Serializable {
 
         return true;
     }
-    private ArrayList<String> deepSearch(String s){
+
+    private ArrayList<Ocorrencia> deepSearch(String s){
         ArrayList<Mapa> ponteiro1 = mapa;
-        ArrayList<String> resultado = new ArrayList<String>();
+        ArrayList<Ocorrencia> resultado = new ArrayList<Ocorrencia>();
             for (int x = 0; x < ponteiro1.size(); x++) {
                 if(ponteiro1.get(x).getInfo()!="" && ponteiro1.get(x).getInfo().contains(s)){
-                    resultado.add(ponteiro1.get(x).getChave());
+                    resultado.add(new Ocorrencia(ponteiro1.get(x).getChave()));
+                    ArrayList<String> listagemOcorStr = listarOcorStr(ponteiro1.get(x).getInfo(),s);
+                    resultado.get(resultado.size()-1).setOcorrencias(listagemOcorStr);
                 }
-                ArrayList<String> vindo = searchAux(s,ponteiro1.get(x));
+                ArrayList<Ocorrencia> vindo = searchAux(s,ponteiro1.get(x));
                 if (vindo.size()!=0){
                     resultado.addAll(vindo);
                 }
@@ -241,19 +247,34 @@ public class ChatBotIA implements Serializable {
             return resultado;
     }
 
-    private ArrayList<String> searchAux(String s,Mapa pontaux){
+    private ArrayList<Ocorrencia> searchAux(String s,Mapa pontaux){
         ArrayList<Mapa> ponteiroaux = pontaux.getSubseções();
-        ArrayList<String> resultado = new ArrayList<String>();
+        ArrayList<Ocorrencia> resultado = new ArrayList<Ocorrencia>();
         for( int x=0;x< ponteiroaux.size();x++){
             if(ponteiroaux.get(x).getInfo()!="" && ponteiroaux.get(x).getInfo().contains(s)){
-                resultado.add(ponteiroaux.get(x).getChave());
+                resultado.add(new Ocorrencia(ponteiroaux.get(x).getChave()));
+                ArrayList<String> listagemOcorStr = listarOcorStr(ponteiroaux.get(x).getInfo(),s);
+                resultado.get(resultado.size()-1).setOcorrencias(listagemOcorStr);
             }
-            ArrayList<String> vindo = searchAux(s,ponteiroaux.get(x));
+            ArrayList<Ocorrencia> vindo = searchAux(s,ponteiroaux.get(x));
             if (vindo.size()!=0){
                 resultado.addAll(vindo);
             }
         }
         return resultado;
     }
+
+    private ArrayList<String> listarOcorStr(String info,String s){
+        ArrayList<String> listagemOcorStr = new ArrayList<String>();
+        String[] infoemlinhas = info.split("\n");
+        String S = s.toUpperCase();
+        for(int x=0;x< infoemlinhas.length;x++){
+            if(infoemlinhas[x].contains(s)){
+                listagemOcorStr.add(infoemlinhas[x].replaceAll(s,S));
+            }
+        }
+        return listagemOcorStr;
+    }
+
 
 }
