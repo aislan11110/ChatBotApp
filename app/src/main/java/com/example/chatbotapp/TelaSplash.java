@@ -31,11 +31,11 @@ public class TelaSplash extends AppCompatActivity {
             public void run() {
                 TrocarTela();
             }
-        }, 500);
+        }, 1000);
     }
     private void TrocarTela() {
         leitorpdfparatxt();
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, InicialActivity.class);
         startActivity(intent);
         finish();
     }
