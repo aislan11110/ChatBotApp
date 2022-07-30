@@ -91,10 +91,10 @@ public class ChatBotIA implements Serializable {
             ArrayList<Integer> list = userOptionstr(opçãouser2);
             Mapa ponteiro = null;
             for (int x = 0; x < list.size(); x++) {
-                if (x == 0 && list.get(x)<=mapa.size()) {
+                if (x == 0 && list.get(x)<mapa.size()) {
                         ponteiro = mapa.get(list.get(x));
 
-                } else if(list.get(x)<=ponteiro.getSubseções().size()){
+                } else if(x != 0 && list.get(x)<ponteiro.getSubseções().size()){
                     ponteiro = ponteiro.getSubseções().get(list.get(x));
                 } else {
                     return isInvalido();

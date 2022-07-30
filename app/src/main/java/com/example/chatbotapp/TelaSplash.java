@@ -36,15 +36,18 @@ public class TelaSplash extends AppCompatActivity {
         }, 1000);
     }
     private void TrocarTela() {
-        leitorpdfparatxt();
+        try {
+            leitorpdfparatxt();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Intent intent = new Intent(this, InicialActivity.class);
         intent.putStringArrayListExtra("listadetxt",listadetxt);
         startActivity(intent);
         finish();
     }
 
-    private void leitorpdfparatxt() {
-        try {
+    private void leitorpdfparatxt() throws IOException {
             assetManager = getAssets();
         /*    PDFBoxResourceLoader.init(getApplicationContext());
             InputStream stream = assetManager.open("sol_de_glicose_5_e_10.pdf");
@@ -76,10 +79,7 @@ public class TelaSplash extends AppCompatActivity {
                 FileWriter fw = new FileWriter(file);
                 fw.write(text);
                 fw.close();
+                text= "";
             }
-        } catch(IOException e){
-            e.printStackTrace();
         }
     }
-
-}
