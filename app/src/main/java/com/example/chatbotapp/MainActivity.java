@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AlertDialog.Builder PopUpAjuda;
     private AlertDialog dialog;
     private ImageButton PopUpClose;
+    private String txtname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null){
+            txtname = extras.getString("txtname");
+        }
         bot = leitortxt();
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -122,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ChatBotIA leitortxt(){
         try {
-            ChatBotIA bot = new ChatBotIA(getExternalFilesDir(null),"teste.txt");
+            ChatBotIA bot = new ChatBotIA(getExternalFilesDir(null),txtname);
             return bot;
         } catch (Exception e) {
             e.printStackTrace();

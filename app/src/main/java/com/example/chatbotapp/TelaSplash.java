@@ -16,10 +16,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TelaSplash extends AppCompatActivity {
     AssetManager assetManager;
+    ArrayList<String> listadetxt ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class TelaSplash extends AppCompatActivity {
     private void TrocarTela() {
         leitorpdfparatxt();
         Intent intent = new Intent(this, InicialActivity.class);
+        intent.putStringArrayListExtra("listadetxt",listadetxt);
         startActivity(intent);
         finish();
     }
@@ -54,17 +57,27 @@ public class TelaSplash extends AppCompatActivity {
 
             // transformador_a_oleo
             // teste1
-            InputStream inputstream = getAssets().open("teste1.txt");
-            Scanner scanner = new Scanner(inputstream);
-            while(scanner.hasNextLine()){
-                text += scanner.nextLine()+"\n";
+            String[] serto = getAssets().list("");
+            ArrayList<String> listdetxt = new ArrayList<String>();
+            for (int x = 0; x < serto.length; x++) {
+                if (serto[x].contains(".txt")) {
+                    listdetxt.add(serto[x]);
+                }
             }
-            File path = getApplicationContext().getExternalFilesDir(null);
-            File file = new File(path, "teste.txt");
-            FileWriter fw = new FileWriter(file);
-            fw.write(text);
-            fw.close();
-        } catch (IOException e) {
+            this.listadetxt = listdetxt;
+            for (int x = 0; x < listdetxt.size(); x++) {
+                InputStream inputstream = getAssets().open(listdetxt.get(x));
+                Scanner scanner = new Scanner(inputstream);
+                while (scanner.hasNextLine()) {
+                    text += scanner.nextLine() + "\n";
+                }
+                File path = getApplicationContext().getExternalFilesDir(null);
+                File file = new File(path, listdetxt.get(x));
+                FileWriter fw = new FileWriter(file);
+                fw.write(text);
+                fw.close();
+            }
+        } catch(IOException e){
             e.printStackTrace();
         }
     }
