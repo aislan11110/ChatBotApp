@@ -31,7 +31,7 @@ public class InicialActivity extends AppCompatActivity implements AdapterView.On
                 listadetxt);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-                iniciar.setOnClickListener(new View.OnClickListener(){
+        iniciar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 if(txtName!=null) {

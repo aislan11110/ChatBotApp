@@ -99,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(MainActivity.this, "Fazer tela da configuração", Toast.LENGTH_SHORT).show();
                 break;
 
+            case R.id.nav_atualizar:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Documento()).commit();
+                break;
+
             case R.id.nav_ajuda:
                 createNewPopUpAjuda();
                 break;
