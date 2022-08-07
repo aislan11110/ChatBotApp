@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.audiofx.EnvironmentalReverb;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,20 +18,26 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.gun0912.tedpermission.PermissionListener;
-import com.gun0912.tedpermission.normal.TedPermission;
-
+import java.net.URI;
 import java.util.List;
 
 
 public class Documento extends Fragment implements View.OnClickListener{
 
     String[] permissions = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE};
+    ActivityResultLauncher<String>getConteudo = registerForActivityResult(new ActivityResultContracts.GetContent(),
+            new ActivityResultCallback<Uri>() {
+                @Override
+                public void onActivityResult(Uri result) {
+
+                }
+            });
 
     @Nullable
     @Override
@@ -39,7 +46,6 @@ public class Documento extends Fragment implements View.OnClickListener{
 
         ImageButton Novo_Documento = (ImageButton) view.findViewById(R.id.Documento_Novo);
         Novo_Documento.setOnClickListener(this);
-
         return view;
     }
 
@@ -51,60 +57,29 @@ public class Documento extends Fragment implements View.OnClickListener{
                 if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE
                 )!= PackageManager.PERMISSION_GRANTED) {
                     ActivityCompat.requestPermissions(getActivity(), permissions, 1000);
-                    getStorage();
+                } else {
+                    if(checkPermission()==true){
+                        filepick();
+                    }
                 }
                 break;
 
         }
-
     }
 
-    private void getStorage(){
-        PermissionListener permissionlistener = new PermissionListener() {
-            @Override
-            public void onPermissionGranted() {
-                Toast.makeText(getActivity(), "Permissão Aceita", Toast.LENGTH_SHORT).show();
-            }
+  private boolean checkPermission() {
+      int resultado = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
+      if (resultado == PackageManager.PERMISSION_GRANTED) {
+          return true;
+      } else {
+          return false;
+      }
+}
 
-            @Override
-            public void onPermissionDenied(List<String> deniedPermissions) {
-                Toast.makeText(getActivity(), "Permissão foi negada \n" +
-                        "Conceda permissão, para acessar funcionalidade", Toast.LENGTH_SHORT).show();
-            }
+private void filepick(){
+        getConteudo.launch("text/plain");
+}
 
-        };
-
-        TedPermission.create()
-                .setPermissionListener(permissionlistener)
-                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
-                .check();
-    }
-
-    /*public boolean checkPermission(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            return Environment.isExternalStorageManager();
-        }
-        else{
-            int read = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
-
-            return read == PackageManager.PERMISSION_GRANTED;
-        }
-    }
-
-    private ActivityResultLauncher<String> PermissionResult = registerForActivityResult(
-            new ActivityResultContracts.RequestPermission(),
-            new ActivityResultCallback<Boolean>() {
-                @Override
-                public void onActivityResult(Boolean result) {
-                    Toast.makeText(getContext(), "ENTROOOOOOOOOUUUUUUU", Toast.LENGTH_SHORT).show();
-                    if (result) {
-                        Toast.makeText(getContext(), "Permissão foi concedida", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getContext(), "Permissão foi negada \n" +
-                                "Conceda permissão, para acessar funcionalidade", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });*/
 
 
 }
