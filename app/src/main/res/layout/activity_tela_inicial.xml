@@ -10,7 +10,7 @@
         android:id="@+id/botao_iniciar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Iniciat ChatBot"
+        android:text="Iniciar ChatBot"
         android:textColor="#004D40"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

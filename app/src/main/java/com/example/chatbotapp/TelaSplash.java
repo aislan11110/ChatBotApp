@@ -58,18 +58,22 @@ public class TelaSplash extends AppCompatActivity {
          */
             String text = "";
 
-            // transformador_a_oleo
-            // teste1
-            String[] serto = getAssets().list("");
+            String[] serto = getAssets().list("tipo");
+           String[] serto2 = getExternalFilesDir(null).list();
             ArrayList<String> listdetxt = new ArrayList<String>();
             for (int x = 0; x < serto.length; x++) {
                 if (serto[x].contains(".txt")) {
                     listdetxt.add(serto[x]);
                 }
             }
+            for(int x=0;x<serto2.length;x++){
+                if(serto2[x].contains(".txt") && !listdetxt.contains(serto2[x])){
+                    listdetxt.add(serto2[x]);
+                }
+            }
             this.listadetxt = listdetxt;
-            for (int x = 0; x < listdetxt.size(); x++) {
-                InputStream inputstream = getAssets().open(listdetxt.get(x));
+            for (int x = 0; x < serto.length; x++) {
+                InputStream inputstream = getAssets().open("tipo/"+listdetxt.get(x));
                 Scanner scanner = new Scanner(inputstream);
                 while (scanner.hasNextLine()) {
                     text += scanner.nextLine() + "\n";
