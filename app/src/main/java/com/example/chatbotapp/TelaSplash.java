@@ -57,9 +57,8 @@ public class TelaSplash extends AppCompatActivity {
             document.close();
          */
             String text = "";
-
             String[] serto = getAssets().list("tipo");
-           String[] serto2 = getExternalFilesDir(null).list();
+            String[] serto2 = getExternalFilesDir(null).list();
             ArrayList<String> listdetxt = new ArrayList<String>();
             for (int x = 0; x < serto.length; x++) {
                 if (serto[x].contains(".txt")) {

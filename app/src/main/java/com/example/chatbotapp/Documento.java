@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -88,6 +89,8 @@ public class Documento extends Fragment implements View.OnClickListener{
                 if(path!="" && checkPermission()==true){
                     try {
                         reader();
+                        Toast toast=Toast.makeText(getContext(),"arquivo enviado",Toast.LENGTH_SHORT);
+                        toast.show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
