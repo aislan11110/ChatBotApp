@@ -120,8 +120,6 @@ public class Documento extends Fragment implements View.OnClickListener {
                 
                 Intent intent = new Intent();
                 intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package",getActivity().getPackageName(),null);
-                intent.setData(uri);
                 storageActivityResultLauncher.launch(intent);
 
             } catch (Exception e){
@@ -129,8 +127,6 @@ public class Documento extends Fragment implements View.OnClickListener {
 
                 Intent intent = new Intent();
                 intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package",getActivity().getPackageName(),null);
-                intent.setData(uri);
                 storageActivityResultLauncher.launch(intent);
             }
         } else {
