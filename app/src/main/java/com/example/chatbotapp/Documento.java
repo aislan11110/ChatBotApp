@@ -151,7 +151,7 @@ public class Documento extends Fragment implements View.OnClickListener {
 private void filepick(){
         getConteudo.launch("text/plain");
 }
-
+ 
 private void reader() throws IOException {
 
         //TODO

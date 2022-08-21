@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="By InForma"
+        android:text="By Aislan e Matheus"
         android:textColor="#FFFFFF"
         android:textSize="22sp"
         android:textStyle="bold"
