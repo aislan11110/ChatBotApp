@@ -3,6 +3,7 @@ package com.example.chatbotapp;
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.Image;
@@ -10,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +24,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.ActivityResultRegistry;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -40,6 +43,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Scanner;
@@ -52,11 +56,11 @@ public class Documento extends Fragment implements View.OnClickListener {
     Manifest.permission.WRITE_EXTERNAL_STORAGE};
     ImageButton Novo_Documento;
     private static final int STORAGE_PERMISSION_CODE = 100;
-    ActivityResultLauncher<String> getConteudo = registerForActivityResult(new ActivityResultContracts.GetContent(),
+    private URI arquivo2;
+    private ActivityResultLauncher<String> getConteudo = registerForActivityResult(new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
                 @Override
                 public void onActivityResult(Uri result) {
-
                     File file = new File(result.getPath());
                     path = file.getPath();
                 }
@@ -69,6 +73,19 @@ public class Documento extends Fragment implements View.OnClickListener {
                 }
             }
     );
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Intent data = result.getData();
+                        Uri arquivo = data.getData();
+                        path= arquivo.getPath();
+                    }
+                }
+            });
 
     @Nullable
     @Override
@@ -118,8 +135,9 @@ public class Documento extends Fragment implements View.OnClickListener {
             try{
                 Log.d(TAG, "requesitando permissão: try");
                 
-                Intent intent = new Intent();
-                intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                Intent intent = new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                intent.addCategory("android.intent.category.DEFAULT");
+                intent.setData(Uri.parse(String.format("package:%s",getActivity().getApplicationContext().getPackageName())));
                 storageActivityResultLauncher.launch(intent);
 
             } catch (Exception e){
@@ -149,13 +167,29 @@ public class Documento extends Fragment implements View.OnClickListener {
     }
 
 private void filepick(){
-        getConteudo.launch("text/plain");
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.R){
+           Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+          // intent.addCategory(Intent.CATEGORY_OPENABLE);
+           intent.setType("text/plain");
+           // someActivityResultLauncher.launch(intent);
+            getConteudo.launch("text/plain");
+        } else {
+            getConteudo.launch("text/plain");
+        }
 }
+
+
  
 private void reader() throws IOException {
 
         //TODO
-        File file = new File(path.substring(14));
+        String path20 = path;
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.R){
+
+        } else {
+            path20=path20.substring(14);
+        }
+        File file = new File(path20);
         Scanner scanner = new Scanner(file);
         String dados = "";
         while (scanner.hasNextLine()){
