@@ -56,11 +56,12 @@ public class Documento extends Fragment implements View.OnClickListener {
     Manifest.permission.WRITE_EXTERNAL_STORAGE};
     ImageButton Novo_Documento;
     private static final int STORAGE_PERMISSION_CODE = 100;
-    private URI arquivo2;
+    private Uri arquivo2;
     private ActivityResultLauncher<String> getConteudo = registerForActivityResult(new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
                 @Override
                 public void onActivityResult(Uri result) {
+                    arquivo2= result;
                     File file = new File(result.getPath());
                     path = file.getPath();
                 }
@@ -185,7 +186,7 @@ private void reader() throws IOException {
         //TODO
         String path20 = path;
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.R){
-
+            path20= arquivo2.getPath();
         } else {
             path20=path20.substring(14);
         }
