@@ -188,7 +188,8 @@ private void reader() throws IOException {
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.R){
             path20= arquivo2.getPath();
         } else {
-            path20=path20.substring(14);
+            String[] ps = path20.split(":");
+            path20= ps[1];
         }
         File file = new File(path20);
         Scanner scanner = new Scanner(file);
