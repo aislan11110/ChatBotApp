@@ -10,6 +10,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,6 +39,6 @@ public class InicialActivity extends AppCompatActivity implements I_RecyclerView
         Intent intent = new Intent(InicialActivity.this,MainActivity.class);
         intent.putExtra("txtname",listadetxt.get(position));
         startActivity(intent);
-    }
+    } 
 }
 
