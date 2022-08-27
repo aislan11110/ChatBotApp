@@ -9,50 +9,35 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class InicialActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class InicialActivity extends AppCompatActivity implements I_RecyclerViewInterface{
     ArrayList<String> listadetxt;
     String txtName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial);
-        Button iniciar = (Button) findViewById(R.id.botao_iniciar);
         Bundle extras = getIntent().getExtras();
-        Spinner spinner = findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
+        CardView cardview = findViewById(R.id.cardView);
         if(extras!=null){
            this.listadetxt= extras.getStringArrayList("listadetxt");
-
         }
-        ArrayAdapter<String> adapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,
-                listadetxt);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        iniciar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                if(txtName!=null) {
-                    Intent intent = new Intent(InicialActivity.this, MainActivity.class);
-                    intent.putExtra("txtname",txtName);
-                    startActivity(intent);
-                } else {
-
-                }
-            }
-        });
+        RecyclerView recyclerview = findViewById(R.id.aRecyclerView);
+        I_RecyclerViewAdapter adaptador = new I_RecyclerViewAdapter(this,this.listadetxt,this);
+        recyclerview.setAdapter(adaptador);
+        recyclerview.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        this.txtName = adapterView.getItemAtPosition(i).toString();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
+    public void onItemClick(int position) {
+        Intent intent = new Intent(InicialActivity.this,MainActivity.class);
+        intent.putExtra("txtname",listadetxt.get(position));
+        startActivity(intent);
     }
 }
 

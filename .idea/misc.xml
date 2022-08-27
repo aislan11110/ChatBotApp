@@ -20,7 +20,14 @@
         <entry key="..\:/Users/Matheus/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/tela_chatbot.xml" value="0.16304347826086957" />
         <entry key="..\:/Users/Matheus/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/user_mensagem_rv.xml" value="0.33" />
         <entry key="..\:/Users/Matheus/AndroidStudioProjects/ChatBotApp/app/src/main/res/menu/tela_home.xml" value="0.25" />
+        <entry key="..\:/Users/aisla/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_atualizar.xml" value="0.1265" />
+        <entry key="..\:/Users/aisla/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_chatbot.xml" value="0.1265" />
+        <entry key="..\:/Users/aisla/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_documento_icon.xml" value="0.1265" />
+        <entry key="..\:/Users/aisla/AndroidStudioProjects/ChatBotApp/app/src/main/res/drawable/ic_user.xml" value="0.1265" />
         <entry key="..\:/Users/aisla/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/aisla/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/activity_tela_inicial.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/aisla/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/arecycler_view_linha.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/aisla/AndroidStudioProjects/ChatBotApp/app/src/main/res/layout/bot_mensagem_rv.xml" value="0.22447916666666667" />
       </map>
     </option>
   </component>

@@ -49,13 +49,6 @@ public class TelaSplash extends AppCompatActivity {
 
     private void leitorpdfparatxt() throws IOException {
             assetManager = getAssets();
-        /*    PDFBoxResourceLoader.init(getApplicationContext());
-            InputStream stream = assetManager.open("sol_de_glicose_5_e_10.pdf");
-            PDDocument document = PDDocument.load(stream);
-            PDFTextStripper stripper = new PDFTextStripper();
-            String text = stripper.getText(document);
-            document.close();
-         */
             String text = "";
             String[] serto = getAssets().list("tipo");
             String[] serto2 = getExternalFilesDir(null).list();
