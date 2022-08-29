@@ -14,7 +14,7 @@ public class ChatBotIA implements Serializable {
     private String opçãouser = "";
 
     public ChatBotIA(File bula, String s) throws Exception {
-        pathfile = bula.getPath()+"/"+s;
+        pathfile = bula.getPath()+"/"+"P2Z_"+s+"/"+s+".txt";
         leitor(pathfile);
     }
     private void leitor(String path) throws Exception{
