@@ -1,5 +1,8 @@
 package com.example.chatbotapp.datastructure;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import androidx.annotation.NonNull;
 
 import java.io.File;
@@ -14,8 +17,8 @@ public class ChatBotIA implements Serializable {
     private String opçãouser = "";
 
     public ChatBotIA(File bula, String s) throws Exception {
-        pathfile = bula.getPath()+"/"+"P2Z_"+s+"/"+s+".txt";
-        leitor(pathfile);
+        pathfile = bula.getPath()+"/"+"P2Z_"+s;
+        leitor(pathfile+"/"+s+".txt");
     }
     private void leitor(String path) throws Exception{
 
@@ -24,22 +27,26 @@ public class ChatBotIA implements Serializable {
         int x =-1;
         String concatenador="";
         String chave ="";
+        ArrayList<Bitmap> listadeimg = new ArrayList<Bitmap>();
         while(scanner.hasNextLine()){
             line = scanner.nextLine();
             if(line.length()>1) {
                 if(isCase(line)){
                     if(chave!=""){
-                        treeFunction(chave,concatenador);
+                        treeFunction(chave,concatenador,listadeimg);
+                        listadeimg = new ArrayList<Bitmap>();
                     }
                     chave= line;
                     concatenador="";
+                } else if(line.contains("!!!!!")){
+                    listadeimg.add(imageParaBitmap(line.substring(5)));
                 } else if (chave!=""){
                     concatenador+=line+"\n";
                 }
             }
         }
         if(chave!="" && concatenador!=""){
-            treeFunction(chave,concatenador);
+            treeFunction(chave,concatenador,listadeimg);
         }
 
         }
@@ -194,13 +201,14 @@ public class ChatBotIA implements Serializable {
     }
 
 
-    private void treeFunction(String chave, String concatenador){
+    private void treeFunction(String chave, String concatenador, ArrayList<Bitmap> listaimg){
         int profundidade = howCase(onlyCase(chave));
         if(profundidade==0){
             ArrayList<Mapa> ponteiro = mapa;
             ponteiro.add(new Mapa(chave));
             int tamanho =ponteiro.size()-1;
             ponteiro.get(tamanho).setInfo(concatenador);
+            ponteiro.get(tamanho).setImagens(listaimg);
 
         } else {
             Mapa ponteiro = mapa.get(mapa.size()-1);
@@ -210,10 +218,13 @@ public class ChatBotIA implements Serializable {
             ponteiro.getSubseções().add(new Mapa(chave));
             int tamanho2 = ponteiro.getSubseções().size()-1;
             ponteiro.getSubseções().get(tamanho2).setInfo(concatenador);
+            ponteiro.getSubseções().get(tamanho2).setImagens(listaimg);
         }
 
     }
 
+    
+    // ALGORITMOS DE BUSCA \/
     private boolean isSearch(String s){
         String search = "search:";
         String tipo = s.toLowerCase();
@@ -274,6 +285,35 @@ public class ChatBotIA implements Serializable {
             }
         }
         return listagemOcorStr;
+    }
+
+    // ALGORITMOS DE BUSCA /\
+
+    // CODIGO PARA A IMAGENS \/
+
+    private Bitmap imageParaBitmap(String filename){
+        String pathfileimg = pathfile+"/"+filename;
+        Bitmap bitmap = BitmapFactory.decodeFile(pathfileimg);
+        return bitmap;
+    }
+
+    public ArrayList<Bitmap> retornarimagens(){
+        ArrayList<Integer> list = userOptionstr(opçãouser);
+        if(list.size()==0){
+            return new ArrayList<Bitmap> ();
+        }
+        Mapa ponteiro = null;
+
+        for(int x=0;x<list.size();x++){
+            if(x==0 && list.get(x)<mapa.size()){
+                ponteiro = mapa.get(list.get(x));
+            } else if( x!=0 && list.get(x)<ponteiro.getSubseções().size()){
+                ponteiro = ponteiro.getSubseções().get(list.get(x));
+            } else {
+                break;
+            }
+        }
+        return ponteiro.getImagens();
     }
 
 

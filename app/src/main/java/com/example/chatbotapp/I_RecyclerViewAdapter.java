@@ -2,15 +2,17 @@ package com.example.chatbotapp;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class I_RecyclerViewAdapter extends RecyclerView.Adapter<I_RecyclerViewAdapter.MyViewHolder>{
@@ -36,7 +38,36 @@ public class I_RecyclerViewAdapter extends RecyclerView.Adapter<I_RecyclerViewAd
     @Override
     public void onBindViewHolder(@NonNull I_RecyclerViewAdapter.MyViewHolder holder, int position) {
         holder.textView.setText(listatxt.get(position));
+        // chechar se tem icone
+        if(possuiIcone(position,".jpg")){
+            holder.imageView.setImageBitmap(pegaIcone(position,".jpg"));
+        } else if (possuiIcone(position,".png")) {
+            holder.imageView.setImageBitmap(pegaIcone(position,".png"));
+        }
+
     }
+
+    public boolean possuiIcone(int position, String tipo){
+        String pathpasta = context.getExternalFilesDir(null).getPath()+"/P2Z_"+listatxt.get(position);
+        String[] listagemdapasta = new File(pathpasta).list();
+        for(int x=0;x<listagemdapasta.length;x++){
+            if(listagemdapasta[x].contains("icone"+tipo)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Bitmap pegaIcone(int position,String tipo){
+        String pathicone = context.getExternalFilesDir(null).getPath()+
+                "/P2Z_"+listatxt.get(position)
+                +"/"+"icone"+tipo;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(pathicone);
+        return bitmap;
+    }
+
 
     @Override
     public int getItemCount() {

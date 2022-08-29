@@ -1,5 +1,6 @@
 package com.example.chatbotapp;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class ChatBot extends Fragment {
     private FloatingActionButton MensagemEnviar;
     private final String USER_KEY = "user";
     private final String BOT_KEY = "bot";
+    private final String BOT_IMG_KEY = "imgbot";
     private ArrayList<ChatModal>chatModalArrayList;
     private ChatRV chatRV;
     private ChatBotIA bot;
@@ -71,6 +73,10 @@ public class ChatBot extends Fragment {
             if (mensagem.equals("-1")) {
                 restartbot();
             }
+            ArrayList<Bitmap> imagens0 = imagens();
+            for(int x=0;x< imagens0.size();x++){
+                chatModalArrayList.add(new ChatModal(imagens0.get(x),BOT_IMG_KEY));
+            }
         } else {
             chatModalArrayList.add(new ChatModal("mensagem invalida", BOT_KEY));
         }
@@ -81,6 +87,10 @@ public class ChatBot extends Fragment {
     }
     private void restartbot(){
         chatModalArrayList.add(new ChatModal(bot.resposta(""),BOT_KEY));
+    }
+
+    private ArrayList<Bitmap> imagens(){
+        return this.bot.retornarimagens();
     }
 
 

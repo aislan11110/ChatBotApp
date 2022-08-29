@@ -1,9 +1,11 @@
 package com.example.chatbotapp;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,6 +37,9 @@ public class ChatRV extends RecyclerView.Adapter {
             case 1:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_mensagem_rv, parent, false);
                 return new MensagemBot(view);
+            case 2:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.bot_img_rv,parent,false);
+                return new ImageBot(view);
         }
         return null;
     }
@@ -50,6 +55,8 @@ public class ChatRV extends RecyclerView.Adapter {
             case "bot":
                 ((MensagemBot)holder).botTV.setText(chatModal.getMensagem());
                 break;
+            case "imgbot":
+                ((ImageBot)holder).imageview.setImageBitmap(chatModal.getImagembitmap());
         }
     }
 
@@ -62,6 +69,8 @@ public class ChatRV extends RecyclerView.Adapter {
             case "bot":
                 return 1;
 
+            case "imgbot":
+                return 2;
             default:
                 return -1;
 
@@ -88,6 +97,15 @@ public class ChatRV extends RecyclerView.Adapter {
         public MensagemBot(@NonNull View itemView) {
             super(itemView);
             botTV = itemView.findViewById(R.id.mensagem_bot);
+        }
+    }
+
+    public static class ImageBot extends RecyclerView.ViewHolder{
+
+        ImageView imageview;
+        public ImageBot(@NonNull View itemView) {
+            super(itemView);
+            imageview = itemView.findViewById(R.id.imageView6);
         }
     }
 

@@ -155,7 +155,9 @@ No preparo e administração das Soluções Parenterais (SP), devem ser seguidas
 2- Fazer a assepsia da embalagem primária utilizando álcool 70%; 
 3- Suspender a embalagem pela alça de sustentação; 
 4- Conectar o equipo de infusão da solução. Consultar as instruções de uso do equipo; 
-5- Administrar a solução, por gotejamento contínuo, conforme prescrição médica. 
+5- Administrar a solução, por gotejamento contínuo, conforme prescrição médica.
+
+!!!!!posologia.png
  
 4.6.2. Para adição de medicamentos:
  

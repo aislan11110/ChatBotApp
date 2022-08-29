@@ -1,9 +1,12 @@
 package com.example.chatbotapp;
 
+import android.graphics.Bitmap;
+
 public class ChatModal {
 
     private String mensagem;
     private String enviar;
+    private Bitmap imagembitmap;
 
     public String getMensagem() {
         return mensagem;
@@ -26,5 +29,16 @@ public class ChatModal {
         this.enviar = enviar;
     }
 
+    public ChatModal(Bitmap bitmap, String enviar){
+        this.imagembitmap = bitmap;
+        this.enviar = enviar;
+    }
 
+    public Bitmap getImagembitmap() {
+        return imagembitmap;
+    }
+
+    public void setImagembitmap(Bitmap imagembitmap) {
+        this.imagembitmap = imagembitmap;
+    }
 }
