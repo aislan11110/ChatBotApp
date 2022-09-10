@@ -197,7 +197,16 @@ private void reader() throws IOException {
         while (scanner.hasNextLine()){
             dados += scanner.nextLine()+"\n";
         }
-        File path2 = getActivity().getExternalFilesDir(null);
+        String filenome = file.getName();
+        if(filenome.contains(".txt")){
+            filenome= filenome.substring(0,filenome.length()-4);
+        }
+        String filefoldername = "P2Z_"+filenome;
+        File filefolder = new File(getActivity().getExternalFilesDir(null),filefoldername);
+        if(!filefolder.exists()) {
+           filefolder.mkdir();
+        }
+        File path2 = new File(filefolder.getPath());
         File file2;
         if(file.getName().contains(".txt")) {
             file2 = new File(path2, file.getName());

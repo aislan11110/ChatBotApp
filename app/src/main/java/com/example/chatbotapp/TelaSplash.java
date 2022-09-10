@@ -32,7 +32,7 @@ public class TelaSplash extends AppCompatActivity {
             public void run() {
                 TrocarTela();
             }
-        }, 1000);
+        }, 2000);
     }
     private void TrocarTela() {
         try {
@@ -59,7 +59,7 @@ public class TelaSplash extends AppCompatActivity {
         }
         for(int x=0;x<serto2.length;x++){
             if(serto2[x].contains("P2Z_") && !listdetxt.contains(serto2[x].substring(4))){
-                listdetxt.add(serto[x].substring(4));
+                listdetxt.add(serto2[x].substring(4));
             }
         }
         this.listadetxt = listdetxt;
