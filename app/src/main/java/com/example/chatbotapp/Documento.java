@@ -6,12 +6,15 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
+import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +39,7 @@ import com.gun0912.tedpermission.TedPermissionActivity;
 import com.gun0912.tedpermission.normal.TedPermission;
 
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -56,14 +60,33 @@ public class Documento extends Fragment implements View.OnClickListener {
     Manifest.permission.WRITE_EXTERNAL_STORAGE};
     ImageButton Novo_Documento;
     private static final int STORAGE_PERMISSION_CODE = 100;
-    private Uri arquivo2;
+    private FileDescriptor fd;
+    private String fileName;
     private ActivityResultLauncher<String> getConteudo = registerForActivityResult(new ActivityResultContracts.GetContent(),
             new ActivityResultCallback<Uri>() {
                 @Override
                 public void onActivityResult(Uri result) {
-                    arquivo2= result;
-                    File file = new File(result.getPath());
-                    path = file.getPath();
+                    if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.R) {
+                        Cursor returncursor = getActivity().getContentResolver()
+                                .query(result,null,null,null,null);
+                        int nameIndex = returncursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                        returncursor.moveToFirst();
+                        fileName = returncursor.getString(nameIndex);
+                        ParcelFileDescriptor arquivo;
+                        try{
+                             arquivo = getActivity().getContentResolver().openFileDescriptor(result, "r");
+
+                        } catch (FileNotFoundException e){
+                            e.printStackTrace();
+                            Log.e("Main activity","File not found.");
+                            return;
+                        }
+                         fd = arquivo.getFileDescriptor();
+
+                    } else {
+                        File file = new File(result.getPath());
+                        path = file.getPath();
+                    }
                 }
             });
     ActivityResultLauncher<Intent> storageActivityResultLauncher = registerForActivityResult(
@@ -74,19 +97,6 @@ public class Documento extends Fragment implements View.OnClickListener {
                 }
             }
     );
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-                        Uri arquivo = data.getData();
-                        path= arquivo.getPath();
-                    }
-                }
-            });
 
     @Nullable
     @Override
@@ -113,19 +123,31 @@ public class Documento extends Fragment implements View.OnClickListener {
                 }
                 break;
             case R.id.Documento_Enviar:
-                if (path != "" ) {
                     try {
-                        if(checkPermission()) {
-                            reader();
+                        if(checkPermission() && Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+                            if(path!="") {
+                                reader();
+                            } else {
+                                break;
+                            }
                             Toast toast = Toast.makeText(getContext(), "arquivo enviado", Toast.LENGTH_SHORT);
                             toast.show();
-                        } else {
+                        } else if(checkPermission() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+                            if(fd!=null) {
+                                readerandroid9();
+                            } else {
+                                break;
+                            }
+                            Toast toast = Toast.makeText(getContext(), "arquivo enviado", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        else {
                             requestPermission();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                }
+
                 break;
 
         }
@@ -169,10 +191,6 @@ public class Documento extends Fragment implements View.OnClickListener {
 
 private void filepick(){
         if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.R){
-           Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-          // intent.addCategory(Intent.CATEGORY_OPENABLE);
-           intent.setType("text/plain");
-           // someActivityResultLauncher.launch(intent);
             getConteudo.launch("text/plain");
         } else {
             getConteudo.launch("text/plain");
@@ -182,15 +200,11 @@ private void filepick(){
 
  
 private void reader() throws IOException {
-
-        //TODO
         String path20 = path;
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.R){
-            path20= arquivo2.getPath();
-        } else {
+
             String[] ps = path20.split(":");
             path20= ps[1];
-        }
+
         File file = new File(path20);
         Scanner scanner = new Scanner(file);
         String dados = "";
@@ -221,6 +235,28 @@ private void reader() throws IOException {
         e.printStackTrace();
     }
 
+}
+private void readerandroid9() throws IOException {
+        String filenome=fileName;
+    if(filenome.contains(".txt")){
+        filenome= filenome.substring(0,filenome.length()-4);
+    }
+    String filefoldername = "P2Z_"+filenome;
+    File filefolder = new File(getActivity().getExternalFilesDir(null),filefoldername);
+    File path2 = new File(filefolder.getPath());
+    File file2 = new File(path2,fileName);
+    if(!filefolder.exists()) {
+        filefolder.mkdir();
+    }
+        FileInputStream arquivoescolhido = new FileInputStream(fd);
+        FileOutputStream local = new FileOutputStream(file2);
+        int i;
+        do{
+            i= arquivoescolhido.read();
+            local.write(i);
+        } while(i!=-1);
+        arquivoescolhido.close();
+        local.close();
 }
 
 PermissionListener leitordepermissão = new PermissionListener() {
